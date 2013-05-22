@@ -1,0 +1,4 @@
+#!/bin/sh
+
+find . -name "*" -exec grep -Hn $1 {} \; 2> /dev/null
+

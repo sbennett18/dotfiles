@@ -1,0 +1,10 @@
+#!/bin/sh
+
+rm -rf .git/tags
+ctags --tag-relative --sort=foldcase -Rf.git/tags --exclude=.git --languages=-perl,python --c++-kinds=+p --fields=+iaS --extra=+q
+
+#mkdir .git/tags_lock 2>/dev/null || exit 0
+#trap "rmdir .git/tags_lock; rm .git/tags.$$" EXIT
+
+#ctags --tag-relative -R -f .git/tags.$$ --exclude=.git --languages=-sql
+#mv .git/tags.$$ .git/tags

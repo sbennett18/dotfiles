@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#for file in $(find $HOME/dotfiles/home); do
+for file in $(find $HOME/dotfiles/home -maxdepth 1 -mindepth 1); do
+  ln -sf $file $HOME/`basename $file`;
+done

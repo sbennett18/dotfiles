@@ -1,0 +1,3 @@
+[flake8]
+ignore = E111,E121
+exclude = parsetab.py,ply/,doc/,parser.py,conf.py,__init__.py
