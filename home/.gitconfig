@@ -8,8 +8,8 @@
 	plain = cyan
 
 [user]
-	name =
-	email =
+	name = Stephen Bennett
+	email = bennett18@gmail.com
 
 [merge]
 	conflictstyle = diff3
@@ -53,3 +53,5 @@
 
 [init]
 	templatedir = ~/.git_template
+[push]
+	default = simple

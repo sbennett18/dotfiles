@@ -105,15 +105,15 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 if [ $(uname -s) == "Linux" ]; then
-  # Command completion stuff
-  #  completes hostnames for ssh
-  if [ -r $HOME/.ssh/known_hosts ]; then
-    complete -W "$(awk '{ h=split($1,ha,",") } { print ha[1] }' $HOME/.ssh/known_hosts | tr '\n' ' ')" ssh
-  fi
+    # Command completion stuff
+    #  completes hostnames for ssh
+    if [ -r $HOME/.ssh/known_hosts ]; then
+        complete -W "$(awk '{ h=split($1,ha,",") } { print ha[1] }' $HOME/.ssh/known_hosts | tr '\n' ' ')" ssh
+    fi
 
-  if [ -r $HOME/.autofill_hosts ]; then
-    complete -W "$(cat $HOME/.autofill_hosts)" ssh
-  fi
+    if [ -r $HOME/.autofill_hosts ]; then
+        complete -W "$(cat $HOME/.autofill_hosts)" ssh
+    fi
 fi
 
 # colored man pages :)
@@ -128,3 +128,8 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 # syntax highlighting in less
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export LESS=' -i -R '
+
+GIT_EDITOR=vim
+EDITOR=vim
+
+ANDROID_HOME=$HOME/android/sdk

@@ -11,7 +11,7 @@ alias gitk='gitk --all'
 # Vim aliases
 #alias gvim='gvim -p'
 #alias vim='gvim -p'
-alias vi='vim -p'
+#alias vi='vim -p'
 function sudo () { [[ $1 == vim || $1 == vi ]] && shift && sudoedit "$@" || command sudo "$@"; }
 
 # Python aliases
