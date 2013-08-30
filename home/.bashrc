@@ -132,4 +132,5 @@ export LESS=' -i -R '
 GIT_EDITOR=vim
 EDITOR=vim
 
-ANDROID_HOME=$HOME/android/sdk
+ANDROID_HOME=$HOME/android-studio/sdk
+PATH=$PATH:$HOME/android-studio/bin
