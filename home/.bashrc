@@ -94,7 +94,7 @@ alias dirs="dirs -p"
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 if [ -f ~/.bash_aliases ]; then
-  . ~/.bash_aliases
+    . ~/.bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -132,5 +132,7 @@ export LESS=' -i -R '
 GIT_EDITOR=vim
 EDITOR=vim
 
+# Android development stuff
 ANDROID_HOME=$HOME/android-studio/sdk
 PATH=$PATH:$HOME/android-studio/bin
+JAVA_HOME="/usr/lib/jvm"

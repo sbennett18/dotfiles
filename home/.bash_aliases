@@ -18,3 +18,6 @@ function sudo () { [[ $1 == vim || $1 == vi ]] && shift && sudoedit "$@" || comm
 alias pep8='pep8 --ignore=E111 --repeat'
 alias flake8all="find . -name '*.py' -exec flake8 {} +"
 alias cleanpyc="echo find . -name '*.pyc' -delete; find . -name '*.pyc' -delete"
+
+# Wine aliases
+alias ltspice='"/home/$(whoami)/.wine/drive_c/Program Files (x86)/LTC/LTspiceIV/scad3.exe" &'
