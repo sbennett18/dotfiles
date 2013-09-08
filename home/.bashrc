@@ -138,3 +138,13 @@ PATH=$HOME/bin:$PATH
 ANDROID_HOME=$HOME/android-studio/sdk
 PATH=$PATH:$HOME/android-studio/bin
 JAVA_HOME="/usr/lib/jvm"
+
+HOME_BASH_COMPLETION_DIR=$HOME/etc/bash_completion.d
+if [[ -d $HOME_BASH_COMPLETION_DIR && -r $HOME_BASH_COMPLETION_DIR && \
+    -x $HOME_BASH_COMPLETION_DIR ]]; then
+    for i in $(LC_ALL=C command ls "$HOME_BASH_COMPLETION_DIR"); do
+        i=$HOME_BASH_COMPLETION_DIR/$i
+        [[ ${i##*/} != @($_backup_glob|Makefile*|$_blacklist_glob) \
+            && -f $i && -r $i ]] && . "$i"
+    done
+fi
