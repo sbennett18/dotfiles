@@ -129,8 +129,8 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export LESS=' -i -R '
 
-GIT_EDITOR=vim
-EDITOR=vim
+export GIT_EDITOR=vim
+export EDITOR=vim
 
 PATH=$HOME/bin:$PATH
 
