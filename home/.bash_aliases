@@ -20,5 +20,5 @@ alias flake8all="find . -name '*.py' -exec flake8 {} +"
 alias cleanpyc="echo find . -name '*.pyc' -delete; find . -name '*.pyc' -delete"
 
 # Program aliases
-alias ltspice='"/home/$(whoami)/.wine/drive_c/Program Files (x86)/LTC/LTspiceIV/scad3.exe" &'
+alias ltspice='"$HOME/.wine/drive_c/Program Files (x86)/LTC/LTspiceIV/scad3.exe" &'
 alias matlab='matlab -glnx86 -desktop &'
