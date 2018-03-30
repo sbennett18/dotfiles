@@ -1,400 +1,260 @@
-" Environment {
-  " Basics {
-    set nocompatible    " Be iMproved - must be first line
-    set background=dark
-  " }
-
-  " Setup Bundle Support {
-    filetype off
-    set rtp+=~/.vim/bundle/vundle
-    call vundle#rc()
-  " }
-" }
-
-" Bundles {
-  " Deps {
-    Bundle 'gmarik/vundle'
-  " }
-
-  " General {
-    Bundle 'nathanaelkane/vim-indent-guides'
-    Bundle 'scrooloose/nerdcommenter'
-    Bundle 'tpope/vim-surround'
-    Bundle 'tpope/vim-repeat'
-    Bundle 'matchit.zip'
-    Bundle 'scrooloose/nerdtree'
-    Bundle 'jistr/vim-nerdtree-tabs'
-    Bundle 'altercation/vim-colors-solarized'
-    Bundle 'spf13/vim-autoclose'
-    Bundle 'bling/vim-airline'
-    Bundle 'vim-scripts/restore_view.vim'
-    Bundle 'mbbill/undotree'
-  " }
-
-  " General Programming {
-    Bundle 'tpope/vim-fugitive'
-    Bundle 'airblade/vim-gitgutter'
-    Bundle 'ervandew/supertab'
-    "Bundle 'xolox/vim-easytags'
-    Bundle 'xolox/vim-misc'
-    Bundle 'terryma/vim-multiple-cursors'
-  " }
-
-  " Python {
-    " Pick either python-mode or pyflakes & pydoc
-    "Bundle 'klen/python-mode'
-    Bundle 'python.vim'
-    Bundle 'python_match.vim'
-    Bundle 'pythoncomplete'
-    Bundle 'nvie/vim-flake8'
-  " }
-
-  " Javascript {
-    Bundle 'elzr/vim-json'
-  " }
-" }
-
 " Formatting {
-  set cc=80             " Place vertical bar at 80 characters
-  set nowrap            " Don't wrap long lines
-  set autoindent        " Indent at the same level of the previous line
-  set shiftwidth=2      " Use indents of two spaces
-  set tabstop=2         " An indentation every two columns
-  set softtabstop=2     " Let backspace delete indent
-  set expandtab         " Tabs are spaces, not tabs
-  set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
-  autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml,json autocmd BufWritePre <buffer> call StripTrailingWhitespace()
+    " set cc=80,120         " Place vertical bar at 80 characters
+    set cc=120            " Place vertical bar at 80 characters
+    set nowrap            " Don't wrap long lines
+    set autoindent        " Indent at the same level of the previous line
+    set shiftwidth=4      " Use indents of two spaces
+    set tabstop=4         " An indentation every two columns
+    set softtabstop=4     " Let backspace delete indent
+    set backspace=2
+    set expandtab         " Tabs are spaces, not tabs
+    set pastetoggle=<F12> " pastetoggle (sane indentation on pastes)
+    autocmd FileType c,cpp,java,go,php,javascript,python,twig,xml,yml,json autocmd BufWritePre <buffer> call StripTrailingWhitespace()
 " }
 
 " General {
-  set encoding=utf-8
-  syntax on
-  set modeline           " Enable per-file modeline configurations
+    set encoding=utf-8
+    syntax on
+    set modeline           " Enable per-file modeline configurations
+    " colorscheme default    " https://github.com/nathanaelkane/vim-indent-guides/issues/31#issuecomment-4583981
 
-  " Make tags placed in .git/tags file available in all levels of a repsitory
-  let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
-  if gitroot != ''
-    let &tags = &tags . ',' . gitroot . '/.git/tags'
-  endif
+    " Make tags placed in .git/tags file available in all levels of a repsitory
+    " let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+    " if gitroot != ''
+    "   let &tags = &tags . ',' . gitroot . '/.git/tags'
+    " endif
+    set tags=./tags;
 
-  if has("autocmd")
-    " Enable file type detection.
-    " Also load indent files, to automatically do language-dependent indenting.
-    filetype plugin indent on
-  endif
-
-  set ruler
-  set mouse=nvi
-  set history=50
-  set virtualedit=onemore
-  set number              " Line numbers on
-  set showmatch           " Show matching brackets/parenthesis
-  set suffixes+=.pyc,.pyo " Don't autocomplete these filetypes
-  set wildmenu            " Better ':' command auto-completion
-  set wildmode=list:longest,full
-  set scrolljump=5        " Lines to scroll when cursor leaves screen
-  set scrolloff=3         " Minimum lines to keep above and below the cursor
-  set sidescroll=2        " Only scroll horizontally little by little"
-  set hlsearch            " Highlight search terms
-  set incsearch           " Highlight search terms as you type
-  set ignorecase          " Case insensitive search
-  set smartcase           " Case sensitive search when uppercase present
-  set cursorline          " Highlight the current line
-
-  set nojoinspaces        " Prevents inserting two spaces after punctuation on a join"
-  set splitright          " Puts new vsplit windows to the right of the current
-  set splitbelow          " Puts new split windows to the bottom of the current
-
-  set list
-  set listchars=tab:›\ ,trail:•,extends:#,nbsp:.  " Highlight problematic whitespace
-
-  " Setting up the directories {
-    set backup                " Backups are nice ...
-    if has('persistent_undo')
-        set undofile          " So is persistent undo ...
-        set undolevels=1000   " Maximum number of changes that can be undone
-        set undoreload=10000  " Maximum number lines to save for undo on a buffer reload
+    if has("autocmd")
+        " Enable file type detection.
+        " Also load indent files, to automatically do language-dependent indenting.
+        filetype plugin indent on
     endif
-  " }
+
+    set ruler
+    set mouse=nvi
+    set history=50
+    set virtualedit=onemore
+    set showmatch           " Show matching brackets/parenthesis
+    set suffixes+=.pyc,.pyo " Don't autocomplete these filetypes
+    set wildmenu            " Better ':' command auto-completion
+    set wildmode=list:longest,full
+    set scrolljump=5        " Lines to scroll when cursor leaves screen
+    set scrolloff=3         " Minimum lines to keep above and below the cursor
+    set sidescroll=2        " Only scroll horizontally little by little"
+    set hlsearch            " Highlight search terms
+    set incsearch           " Highlight search terms as you type
+    set ignorecase          " Case insensitive search
+    set smartcase           " Case sensitive search when uppercase present
+    set cursorline          " Highlight the current line
+    " autocmd InsertEnter * set cursorline
+    " autocmd InsertLeave * set nocursorline
+    set nu rnu              " Relative line numbers; absolute for current line
+    augroup numbertoggle
+        autocmd!
+        autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set relativenumber   | endif
+        autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set norelativenumber | endif
+    augroup END
+
+    set nojoinspaces        " Prevents inserting two spaces after punctuation on a join
+    set splitright          " Puts new vsplit windows to the right of the current
+    set splitbelow          " Puts new split windows to the bottom of the current
+
+    set list
+    set listchars=tab:›\ ,trail:•,extends:#,nbsp:.  " Highlight problematic whitespace
+
+    " Setting up the directories {
+        set backup                " Backups are nice ...
+        set backupdir=~/.vim/tmp//,.  " Backups in home directory
+        set undodir=~/.vim/tmp//,.    " Undo files in home directory
+        set directory=~/.vim/tmp//,.  " Swap files in home directory
+        if has('persistent_undo')
+            set undofile          " So is persistent undo ...
+            set undolevels=1000   " Maximum number of changes that can be undone
+            set undoreload=10000  " Maximum number lines to save for undo on a buffer reload
+        endif
+    " }
 " }
 
 " Key (re)Mappings {
-  " Any time <leader> appears in a keybinding it means use the key assigned
-  " here (i.e. ,)
-  let mapleader = ','
+    " Any time <leader> appears in a keybinding it means use the key assigned
+    " here (i.e. ,)
+    let mapleader = ','
 
-  " Stupid shift fixes
-  nmap ; :
+    " Stupid shift fixes
+    " nmap ; :
 
-  " Wrapped lines goes down/up to next row, rather than next line in file.
-  noremap j gj
-  noremap k gk
+    " Wrapped lines goes down/up to next row, rather than next line in file.
+    noremap j gj
+    noremap k gk
 
-  " Easier horizontal scrolling
-  map zl zL
-  map zh zH
+    " Easier horizontal scrolling
+    map zl zL
+    map zh zH
 
-  " Visual shifting (does not exit Visual mode)
-  vnoremap < <gv
-  vnoremap > >gv
+    " Visual shifting (does not exit Visual mode)
+    vnoremap < <gv
+    vnoremap > >gv
 
-  " Allow using the repeat operator with a visual selection (!)
-  " http://stackoverflow.com/a/8064607/127816
-  vnoremap . :normal .<cr>
+    " Allow using the repeat operator with a visual selection (!)
+    " http://stackoverflow.com/a/8064607/127816
+    vnoremap . :normal .<cr>
 
-  " Yank from the cursor to the end of the line, to be consistent with C and D.
-  nnoremap Y y$
+    " Yank from the cursor to the end of the line, to be consistent with C and D.
+    nnoremap Y y$
 
-  " Un-highlight search results
-  nmap <silent> <leader>/ :nohl<CR>
+    " Move lines up or down
+    nnoremap <leader>j :m .+1<CR>==
+    nnoremap <leader>k :m .-2<CR>==
+    inoremap <leader>j <Esc>:m .+1<CR>==gi
+    inoremap <leader>k <Esc>:m .-2<CR>==gi
+    vnoremap <leader>j :m '>+1<CR>gv=gv
+    vnoremap <leader>k :m '<-2<CR>gv=gv
 
-  if (v:version >= 700)
-    " Toggle spell-checking
-    nmap <silent> <leader>s :silent set spell!<CR>
-  endif
+    " Un-highlight search results
+    nmap <silent> <leader>/ :nohl<CR>
 
-  " Find merge conflict markers
-  map <leader>fc /\v^[<\|=>]{7}( .*\|$)<cr>
+    nmap <leader><Tab> gt
+    nmap <leader><S-Tab> gT
+    nmap <leader><leader><Tab> gT
 
-  " Quickly jump to a tag if there's only one match, otherwise show the list
-  map <F3> :tj<space>
+    if (v:version >= 700)
+        " Toggle spell-checking
+        nmap <silent> <leader>s :silent set spell!<CR>
+    endif
 
-  " Display a list of included files and quickly jump to one
-  map <F4> [I:let nr = input("Which one: ")<bar>exe "normal " . nr ."[\t"<cr>"]"]
+    " Find merge conflict markers
+    nmap <leader>fc /\v^[<\|=>]{7}( .*\|$)<cr>
+    nmap <leader>fd :SignifyFold<cr>
 
-  " Code folding options
-  nmap <leader>f0 :set foldlevel=0<CR>
-  nmap <leader>f1 :set foldlevel=1<CR>
-  nmap <leader>f2 :set foldlevel=2<CR>
-  nmap <leader>f3 :set foldlevel=3<CR>
-  nmap <leader>f4 :set foldlevel=4<CR>
-  nmap <leader>f5 :set foldlevel=5<CR>
-  nmap <leader>f6 :set foldlevel=6<CR>
-  nmap <leader>f7 :set foldlevel=7<CR>
-  nmap <leader>f8 :set foldlevel=8<CR>
-  nmap <leader>f9 :set foldlevel=9<CR>
+    " Quickly jump to a tag if there's only one match, otherwise show the list
+    map <F3> :tj<space>
 
-  " Map <Leader>ff to display all lines with keyword under cursor
-  " and ask which one to jump to
-  nmap <Leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+    " Display a list of included files and quickly jump to one
+    map <F4> [I:let nr = input("Which one: ")<bar>exe "normal " . nr ."[\t"<cr>"]"]
+
+    " Map <Leader>ff to display all lines with keyword under cursor
+    " and ask which one to jump to
+    " nmap <leader>ff [I:let nr = input("Which one: ")<Bar>exe "normal " . nr ."[\t"<CR>
+
+    " Code folding options
+    set foldmethod=syntax
+    nmap <leader>f0 :set foldlevel=0<CR>
+    nmap <leader>f1 :set foldlevel=1<CR>
+    nmap <leader>f2 :set foldlevel=2<CR>
+    nmap <leader>f3 :set foldlevel=3<CR>
+    nmap <leader>f4 :set foldlevel=4<CR>
+    nmap <leader>f5 :set foldlevel=5<CR>
+    nmap <leader>f6 :set foldlevel=6<CR>
+    nmap <leader>f7 :set foldlevel=7<CR>
+    nmap <leader>f8 :set foldlevel=8<CR>
+    nmap <leader>f9 :set foldlevel=9<CR>
+    nnoremap za zA
+    nnoremap zA za
+    nnoremap zc zC
+    nnoremap zC zc
+    nnoremap zo zO
+    nnoremap zO zo
 " }
 
 " Always switch to the current file directory
 autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 
-" Instead of reverting the cursor to the last position in the buffer, we
-" set it to the first line when editing a git commit message
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
-
-" Vim UI {
-  "colorscheme evening
-  " Use the solarized colorscheme @ https://github.com/altercation/solarized
-  colorscheme solarized
-  let g:solarized_termcolors=256
-
-  if &term == 'xterm' || &term == 'screen'
-    set t_Co=256
-  endif
-
-  if has('statusline')
-    set laststatus=2
-
-    " Broken down into easily includeable segments
-    set statusline=%<%f\                     " Filename
-    set statusline+=%w%h%m%r                 " Options
-    set statusline+=%{fugitive#statusline()} " Git Hotness
-    set statusline+=\ [%{&ff}/%Y]            " Filetype
-    set statusline+=\ [%{getcwd()}]          " Current dir
-    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
-  endif
-
-  highlight clear SignColumn      " SignColumn should match background for
-                                  " things like vim-gitgutter
+" Strip whitespace {
+    function! StripTrailingWhitespace()
+        " Preparation: save last search and cursor position.
+        let _s=@/
+        let l = line(".")
+        let c = col(".")
+        " Do the business
+        %s/\s\+$//e
+        " Clean up: restore previous search history and cursor position
+        let @/=_s
+        call cursor(l, c)
+    endfunction
 " }
 
-" Plugins {
-  " vim-json {
-    " Disable concealing of "
-    let g:vim_json_syntax_conceal=0
-  " }
+" Cygwin Block Cursor {
+    let &t_ti.="\e[1 q"
+    let &t_SI.="\e[5 q"
+    let &t_EI.="\e[1 q"
+    let &t_te.="\e[0 q"
+" }
 
-  " Fugitive {
-    nnoremap <silent> <leader>gs :Gstatus<CR>
-    nnoremap <silent> <leader>gd :Gdiff<CR>
-    nnoremap <silent> <leader>gc :Gcommit<CR>
-    nnoremap <silent> <leader>gb :Gblame<CR>
-    nnoremap <silent> <leader>gl :Glog<CR>
-    nnoremap <silent> <leader>gp :Git push<CR>
-    nnoremap <silent> <leader>gw :Gwrite<CR>:GitGutter<CR>
-    nnoremap <silent> <leader>gg :GitGutterToggle<CR>
-  "}
+" plug.vim {
+    call plug#begin('~/.vim/plugged')
 
-  " PyMode {
-    if !has('python')
-      let g:pymode = 1
-    endif
-    let g:pymode_lint_checker = "pyflakes"
-    let g:pymode_utils_whitespaces = 0
-    let g:pymode_options = 0
-  " }
+    " Plug 'tpope/vim-sensible'
+    Plug 'scrooloose/nerdcommenter'  " , { 'on': ['NERDComToggleComment', 'NERDComInvertComment'] }
+    Plug 'scrooloose/syntastic'
+    Plug 'nathanaelkane/vim-indent-guides'
+    Plug 'tpope/vim-surround'
+    " Plug 'spf13/vim-autoclose'
+    Plug 'nvie/vim-flake8'
+    Plug 'jnurmine/Zenburn'
+    Plug 'altercation/vim-colors-solarized'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'mhinz/vim-signify'
+    " Plug 'edkolev/tmuxline.vim'
+    Plug 'godlygeek/tabular'
+    call plug#end()
+" }
 
-  " Enable omni completion {
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  " }
+" NERDCommenter {
+    " Add spaces after comment delimiters by default
+    let g:NERDSpaceDelims = 1
 
-  " airline {
-    set noshowmode                    " Disable default mode indicator
-    let g:airline_left_sep='›'
-    let g:airline_right_sep='‹'
-    "let g:airline_powerline_fonts=1   " Enable powerline font symbols
-  " }
+    " Use compact syntax for prettified multi-line comments
+    let g:NERDCompactSexyComs = 1
 
-  " indent_guides {
-    " For some colorschemes, autocolor will not work (eg: 'desert', 'ir_black')
-    let g:indent_guides_auto_colors = 1
+    " Align line-wise comment delimiters flush left instead of following code indentation
+    let g:NERDDefaultAlign = 'left'
+
+    " Set a language to use its alternate delimiters by default
+    let g:NERDAltDelims_java = 1
+
+    " Add your own custom formats or override the defaults
+    let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+    " Allow commenting and inverting empty lines (useful when commenting a region)
+    let g:NERDCommentEmptyLines = 1
+
+    " Enable trimming of trailing whitespace when uncommenting
+    let g:NERDTrimTrailingWhitespace = 1
+" }
+
+" vim-indent-guides {
+    let g:indent_guides_enable_on_vim_startup = 1
     let g:indent_guides_start_level = 2
     let g:indent_guides_guide_size = 1
-    let g:indent_guides_enable_on_vim_startup = 1
-  " }
-
-  " OmniComplete {
-    if has("autocmd") && exists("+omnifunc")
-      autocmd Filetype *
-        \if &omnifunc == "" |
-        \setlocal omnifunc=syntaxcomplete#Complete |
-        \endif
-    endif
-
-    hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
-    hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
-    hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
-
-    " Some convenient mappings
-    inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-    inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-    inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-    inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-    inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-    inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
-
-    " Automatically open and close the popup menu / preview window
-    au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-    set completeopt=menu,preview,longest
-  " }
-
-  " NerdTree {
-    map <C-e> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
-    map <leader>e :NERDTreeFind<CR>
-    nmap <leader>nt :NERDTreeFind<CR>
-
-    let NERDTreeShowBookmarks=1
-    let NERDTreeIgnore=['\.pyc', '\~$', '\.swo$', '\.swp$', '\.git', '\.hg', '\.svn', '\.bzr']
-    let NERDTreeChDirMode=0
-    let NERDTreeQuitOnOpen=1
-    let NERDTreeMouseMode=2
-    let NERDTreeShowHidden=1
-    let NERDTreeKeepTreeInNewTab=1
-    let g:nerdtree_tabs_open_on_gui_startup=0
-  " }
-
-  " Undotree {
-    nnoremap <F5> :UndotreeToggle<CR>
-    nnoremap <leader>u :UndotreeToggle<CR>
-  " }
 " }
 
-" Strip whitespace {
-  function! StripTrailingWhitespace()
-    " Preparation: save last search and cursor position.
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    " Do the business
-    %s/\s\+$//e
-    " Clean up: restore previous search history and cursor position
-    let @/=_s
-    call cursor(l, c)
-  endfunction
+" vim-flake8 {
+    let g:flake8_show_in_file = 1
+    let g:flake8_show_in_gutter = 1
+    highlight link Flake8_Error       Error
+    highlight link FLAKE8_Warning     WarningMsg
+    highlight link FLAKE8_Complexity  WarningMsg
+    highlight link FLAKE8_Naming      WarningMsg
+    highlight link FLAKE8_PyFlake     WarningMsg
 " }
 
-" Initialize NERDTree as needed {
-  function! NERDTreeInitAsNeeded()
-    redir => bufoutput
-    buffers!
-    redir END
-    let idx = stridx(bufoutput, "NERD_tree")
-    if idx > -1
-      NERDTreeMirror
-      NERDTreeFind
-      wincmd l
-    endif
-  endfunction
+" Zenburn {
+    " colorscheme zenburn
 " }
 
-" Initialize directories {
-  function! InitializeDirectories()
-    let parent = $HOME
-    let prefix = 'vim'
-    let dir_list = {
-          \ 'backup': 'backupdir',
-          \ 'views': 'viewdir',
-          \ 'swap': 'directory' }
-
-    if has('persistent_undo')
-      let dir_list['undo'] = 'undodir'
-    endif
-
-    let common_dir = $HOME . '/.vim/.vim'
-
-    for [dirname, settingname] in items(dir_list)
-      let directory = common_dir . dirname . '/'
-      if exists("*mkdir")
-        if !isdirectory(directory)
-          call mkdir(directory)
-        endif
-      endif
-      if !isdirectory(directory)
-        echo "Warning: Unable to create backup directory: " . directory
-        echo "Try: mkdir -p " . directory
-      else
-        let directory = substitute(directory, " ", "\\\\ ", "g")
-        exec "set " . settingname . "=" . directory
-      endif
-    endfor
-  endfunction
+" Solarized {
+    let g:solarized_termcolors=256
+    set background=dark
+    colorscheme solarized
 " }
 
-" Shell command {
-  function! s:RunShellCommand(cmdline)
-    botright new
-
-    setlocal buftype=nofile
-    setlocal bufhidden=delete
-    setlocal nobuflisted
-    setlocal noswapfile
-    setlocal nowrap
-    setlocal filetype=shell
-    setlocal syntax=shell
-
-    call setline(1, a:cmdline)
-    call setline(2, substitute(a:cmdline, '.', '=', 'g'))
-    execute 'silent $read !' . escape(a:cmdline, '%#')
-    setlocal nomodifiable
-    1
-  endfunction
+" Airline {
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#whitespace#enabled = 1
+    let g:airline_theme='molokai'
 " }
 
-" Grep current file:
-"   :Shell grep -Hn <search_term> %
-
-" Finish local initializations {
-  call InitializeDirectories()
-" }
-
-" Commands {
-  " Shell
-  command! -complete=file -nargs=+ Shell call s:RunShellCommand(<q-args>)
-" }
-
-" vim:set sw=2 ts=2 sts=2 expandtab:
+" vim: sw=4 ts=4 sts=4 expandtab:

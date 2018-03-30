@@ -1,24 +1,42 @@
+# .bash_aliases
+
+# User specific aliases and functions
+# If these are enabled they will be used instead of any instructions
+# they may mask.  For example, alias rm='rm -i' will mask the rm
+# application.  To override the alias instruction use a \ before, ie
+# \rm will call the real rm not the alias.
+#
+# Interactive operation...
+# alias rm='rm -i'
+# alias cp='cp -i'
+# alias mv='mv -i'
+#
+# Default to human readable figures
+# alias df='df -h'
+# alias du='du -h'
+#
+# Misc :)
+# alias less='less -r'                          # raw control characters
+# alias whence='type -a'                        # where, of a sort
+alias grep='grep --color'                     # show differences in colour
+alias egrep='egrep --color=auto'              # show differences in colour
+alias fgrep='fgrep --color=auto'              # show differences in colour
+alias grepc='grep --include=*.{c,h} -n'
+
+# Some shortcuts for different directory listings
+alias sl='ls'
+alias ls='ls -hF --color=tty'                 # classify files in colour
+alias dir='ls --color=auto --format=vertical'
+alias vdir='ls --color=auto --format=long'
+alias l='ls -CF'                              #
+alias ll='ls -l'                              # long list
+alias la='ls -A'                              # all but . and ..
+alias lal='ls -Al'                            # long list, all but . and ..
+
 alias h='history | less +G'
 
-# Aptitude aliases
-alias update='time sudo apt-get update'
-alias upgrade='time sudo apt-get upgrade'
-alias dupgrade='time sudo apt-get dist-upgrade'
+alias vimrc="vim ${HOME}/.vimrc"
 
-# Git aliases
-alias gitk='gitk --all'
+alias svn-reset-hard='svn revert . -R && svn status | rm -rf $(awk -f <(echo "/^?/{print \$2}") <(svn status) ;)'
 
-# Vim aliases
-#alias gvim='gvim -p'
-#alias vim='gvim -p'
-#alias vi='vim -p'
-function sudo () { [[ $1 == vim || $1 == vi ]] && shift && sudoedit "$@" || command sudo "$@"; }
-
-# Python aliases
-alias pep8='pep8 --ignore=E111 --repeat'
-alias flake8all="find . -name '*.py' -exec flake8 {} +"
-alias cleanpyc="echo find . -name '*.pyc' -delete; find . -name '*.pyc' -delete"
-
-# Program aliases
-alias ltspice='"$HOME/.wine/drive_c/Program Files (x86)/LTC/LTspiceIV/scad3.exe" &'
-alias matlab='matlab -glnx86 -desktop &'
+alias ctagger='ctags --totals=yes -R -f tags .'
