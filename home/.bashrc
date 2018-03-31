@@ -120,17 +120,17 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ $(uname -s) == "Linux" ]; then
-    # Command completion stuff
-    #  completes hostnames for ssh
-    if [ -r $HOME/.ssh/known_hosts ]; then
-        complete -W "$(awk '{ h=split($1,ha,",") } { print ha[1] }' $HOME/.ssh/known_hosts | tr '\n' ' ')" ssh
-    fi
-
-    if [ -r $HOME/.autofill_hosts ]; then
-        complete -W "$(cat $HOME/.autofill_hosts)" ssh
-    fi
-fi
+#if [ $(uname -s) == "Linux" ]; then
+#    # Command completion stuff
+#    #  completes hostnames for ssh
+#    if [ -r $HOME/.ssh/known_hosts ]; then
+#        complete -W "$(awk '{ h=split($1,ha,",") } { print ha[1] }' $HOME/.ssh/known_hosts | tr '\n' ' ')" ssh
+#    fi
+#
+#    if [ -r $HOME/.autofill_hosts ]; then
+#        complete -W "$(cat $HOME/.autofill_hosts)" ssh
+#    fi
+#fi
 
 # colored man pages :)
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -146,10 +146,3 @@ export LESSOPEN="| src-hilite-lesspipe.sh %s"
 export LESS=' -i -R '
 
 export EDITOR=vim
-
-PATH=$HOME/bin:$PATH
-
-# Android development stuff
-ANDROID_HOME=$HOME/android-studio/sdk
-PATH=$PATH:$HOME/android-studio/bin
-JAVA_HOME="/usr/lib/jvm"
