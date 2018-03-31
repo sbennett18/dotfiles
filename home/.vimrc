@@ -64,7 +64,7 @@
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:.  " Highlight problematic whitespace
 
     " Setting up the directories {
-        set backup                " Backups are nice ...
+        set backup                    " Backups are nice ...
         set backupdir=~/.vim/tmp//,.  " Backups in home directory
         set undodir=~/.vim/tmp//,.    " Undo files in home directory
         set directory=~/.vim/tmp//,.  " Swap files in home directory
