@@ -1,7 +1,8 @@
 #!/bin/sh
 
-rm -rf .git/tags
-ctags --tag-relative --sort=foldcase -Rf.git/tags --exclude=.git --languages=-perl,python --c++-kinds=+p --fields=+iaS --extra=+q
+#ctags --tag-relative --sort=foldcase -Rf.git/tags --exclude=.git --languages=-perl,python --c++-kinds=+p --fields=+iaS --extra=+q
+root="$(readlink -f "$(git rev-parse --show-toplevel)")"
+exec ctags --totals=yes --tag-relative=yes -f "${root}/tags" -R "${root}"
 
 #mkdir .git/tags_lock 2>/dev/null || exit 0
 #trap "rmdir .git/tags_lock; rm .git/tags.$$" EXIT

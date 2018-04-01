@@ -21,11 +21,11 @@
 alias grep='grep --color'                     # show differences in colour
 alias egrep='egrep --color=auto'              # show differences in colour
 alias fgrep='fgrep --color=auto'              # show differences in colour
-alias grepc='grep --include=*.{c,h} -n'
+alias cgrep='grep --include=*.{c*,h*} -n'
 
 # Some shortcuts for different directory listings
 alias sl='ls'
-alias ls='ls -hF --color=tty'                 # classify files in colour
+alias ls='ls -F --color=tty'                 # classify files in colour
 alias dir='ls --color=auto --format=vertical'
 alias vdir='ls --color=auto --format=long'
 alias l='ls -CF'                              #

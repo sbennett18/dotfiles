@@ -1,0 +1,26 @@
+## Brace Style Options
+# "One True Brace Style"
+--style=1tbs
+
+## Indentation Options
+--indent=spaces=4
+#--indent-cases
+--indent-after-parens
+
+## Padding Options
+--break-blocks
+--pad-oper
+--unpad-paren
+--pad-header
+
+--align-pointer=type
+--align-reference=name
+
+## Formatting Options
+--break-return-type
+--attach-return-type-decl
+
+## Other Options
+--formatted
+--lineend=linux
+--suffix=none

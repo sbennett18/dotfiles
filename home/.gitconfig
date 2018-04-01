@@ -34,6 +34,7 @@
 	sb = show-branch --topo-order --more=9999
 	ri = rebase -i --autosquash
 	root = rev-parse --show-toplevel
+	graph = log --graph --oneline --decorate
 
 ; The following command removes all references of <filename> from the repository
 ;git filter-branch --index-filter 'git rm --cached --ignore-unmatch <filename>' --prune-empty HEAD

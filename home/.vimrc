@@ -49,12 +49,17 @@
     set cursorline          " Highlight the current line
     " autocmd InsertEnter * set cursorline
     " autocmd InsertLeave * set nocursorline
-    set nu rnu              " Relative line numbers; absolute for current line
-    augroup numbertoggle
-        autocmd!
-        autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set relativenumber   | endif
-        autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set norelativenumber | endif
-    augroup END
+    set nu                  " Absolute line numbers
+    " set nu rnu              " Relative line numbers; absolute for current line
+    " augroup numbertoggle
+    "     autocmd!
+    "     autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu | set relativenumber   | endif
+    "     autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu | set norelativenumber | endif
+    " augroup END
+    " augroup resCur
+    "     autocmd!
+    "     autocmd BufReadPost * call setpos(".", getpos("'\""))
+    " augroup END
 
     set nojoinspaces        " Prevents inserting two spaces after punctuation on a join
     set splitright          " Puts new vsplit windows to the right of the current
@@ -65,14 +70,13 @@
 
     " Setting up the directories {
         set backup                    " Backups are nice ...
-        set backupdir=~/.vim/tmp//,.  " Backups in home directory
-        set undodir=~/.vim/tmp//,.    " Undo files in home directory
-        set directory=~/.vim/tmp//,.  " Swap files in home directory
         if has('persistent_undo')
             set undofile          " So is persistent undo ...
             set undolevels=1000   " Maximum number of changes that can be undone
             set undoreload=10000  " Maximum number lines to save for undo on a buffer reload
         endif
+        au BufWinLeave * mkview
+        au VimEnter * loadview
     " }
 " }
 
@@ -155,6 +159,23 @@
     nnoremap zC zc
     nnoremap zo zO
     nnoremap zO zo
+
+    " <C-R>= command inserts the value returned by the invoked function at the
+    "   current location in the command-line
+    " C<-\>e command replaces the entire command-line with the value returned
+    "   by the invoked function
+    nnoremap <leader>oh :vsp<CR>:tag <C-R>=expand('%:t:r') . ".h"<CR><CR>
+    function! ToggleHeaderCodeFile()
+        let current_ext = expand('%:e')
+        if current_ext == "c"
+            let toggle_ext = ".h"
+        else
+            let toggle_ext = ".c"
+        endif
+        let toggle_file = expand('%:t:r') . toggle_ext
+        return toggle_file
+    endfunction
+    nnoremap <C-k><C-o> :vsp<CR>:tag <C-R>=ToggleHeaderCodeFile()<CR><CR>
 " }
 
 " Always switch to the current file directory
@@ -205,14 +226,8 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
     " Add spaces after comment delimiters by default
     let g:NERDSpaceDelims = 1
 
-    " Use compact syntax for prettified multi-line comments
-    let g:NERDCompactSexyComs = 1
-
     " Align line-wise comment delimiters flush left instead of following code indentation
     let g:NERDDefaultAlign = 'left'
-
-    " Set a language to use its alternate delimiters by default
-    let g:NERDAltDelims_java = 1
 
     " Add your own custom formats or override the defaults
     let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
@@ -255,6 +270,42 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
     let g:airline_powerline_fonts = 1
     let g:airline#extensions#whitespace#enabled = 1
     let g:airline_theme='molokai'
+" }
+
+" Initialize directories {
+function! InitializeDirectories()
+    let parent = $HOME
+    let prefix = 'vim'
+    let common_dir = parent . '/.' . prefix . '/'
+
+    let dir_list = {
+            \ 'backup': 'backupdir',
+            \ 'view': 'viewdir',
+            \ 'swap': 'directory' }
+
+    if has('persistent_undo')
+        let dir_list['undo'] = 'undodir'
+    endif
+
+    for [dirname, settingname] in items(dir_list)
+        let directory = common_dir . dirname
+        if exists("*mkdir")
+            if !isdirectory(directory)
+                echo "mkdir " . directory
+                call mkdir(directory)
+            endif
+        endif
+        if !isdirectory(directory)
+            echo "Warning: Unable to create backup directory: " . directory
+            echo "Try: mkdir -p " . directory
+        else
+            let directory = substitute(directory, " ", "\\\\ ", "g")
+            let cmd = "set " . settingname . "=" . directory . '//'
+            exec cmd
+        endif
+    endfor
+endfunction
+call InitializeDirectories()
 " }
 
 " vim: sw=4 ts=4 sts=4 expandtab:
