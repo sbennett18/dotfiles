@@ -27,8 +27,9 @@
 	;compare = show-branch --more=999 --current
 	ccompare = show-branch --current --topo-order
 	;compare = show-branch --topo-order
-	update = remote --verbose update --prune
-	incoming = !git update && git log ..@{upstream}
+	update = fetch --verbose --all --prune
+	; incoming = !git update && git log ..@{upstream}
+	incoming = log ..@{upstream}
 	outgoing = log @{upstream}..
 	ctags = !.git/hooks/ctags
 	sb = show-branch --topo-order --more=9999
