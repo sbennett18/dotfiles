@@ -75,8 +75,17 @@
             set undolevels=1000   " Maximum number of changes that can be undone
             set undoreload=10000  " Maximum number lines to save for undo on a buffer reload
         endif
-        au BufWinLeave * mkview
-        au VimEnter * loadview
+        au BufWinLeave *  if ShouldSaveFile() | mkview | endif
+        au VimEnter * if ShouldSaveFile() | loadview | endif
+
+        function ShouldSaveFile()
+            if empty(expand('%'))
+                return 0
+            elseif &filetype == "gitcommit"
+                return 0
+            endif
+            return 1
+        endfunction
     " }
 " }
 
@@ -162,7 +171,7 @@
 
     " <C-R>= command inserts the value returned by the invoked function at the
     "   current location in the command-line
-    " C<-\>e command replaces the entire command-line with the value returned
+    " <C-\>e command replaces the entire command-line with the value returned
     "   by the invoked function
     nnoremap <leader>oh :vsp<CR>:tag <C-R>=expand('%:t:r') . ".h"<CR><CR>
     function! ToggleHeaderCodeFile()
