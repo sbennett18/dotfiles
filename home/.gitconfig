@@ -2,6 +2,13 @@
 	name = Stephen Bennett
 	email = bennett18@gmail.com
 
+[core]
+	editor = vim
+	pager = less -F -X -S
+
+[init]
+	templatedir = ~/.git_template
+
 [color]
 	ui = auto
 
@@ -9,9 +16,12 @@
 	conflictstyle = diff3
 	;defaultToUpstream = true
 
+[push]
+	default = simple
+
 [alias]
 	unstage = reset HEAD --
-	last = log -1
+	last = log -1 HEAD --stat
 	st = status
 	co = checkout
 	t = tag -n
@@ -35,14 +45,7 @@
 	sb = show-branch --topo-order --more=9999
 	ri = rebase -i --autosquash
 	root = rev-parse --show-toplevel
-	graph = log --graph --oneline --decorate
+	graph = log --graph --pretty=oneline --abbrev-commit --decorate
 
 ; The following command removes all references of <filename> from the repository
 ;git filter-branch --index-filter 'git rm --cached --ignore-unmatch <filename>' --prune-empty HEAD
-
-[core]
-	editor = vim
-	pager = less -F -X -S
-
-[init]
-	templatedir = ~/.git_template
