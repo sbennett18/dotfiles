@@ -69,7 +69,7 @@ PROMPT_COMMAND=prompt_command
 
 source ~/.git-prompt.sh
 #PS1="$(+ Bright-Black)\\u@\\h $(++ bold yellow)\\W$(--)\$(__git_ps1 ' ($(++ bold green)%s$(--))')$(+ bright-black)$(+)\${ERRMSG} "
-PS1="$(++)\\u@\\h $(++ bold yellow)\\W$(--)\$(__git_ps1 ' ($(++ bold green)%s$(--))')$(+ bright-black)$(+)\${ERRMSG} "
+PS1="$(++)\\u@\\h $(++ bold yellow)\\W$(++ bold green)\$(__git_ps1 ' (%s)')$(+ bright-black)$(+)\${ERRMSG} "
 #PS1='[\u@\h \W$(__git_ps1 " ($(+ bold green)%s$(+))")]${ERRMSG}\$ '
 
 export DISPLAY=localhost:0.0
