@@ -75,17 +75,17 @@
             set undolevels=1000   " Maximum number of changes that can be undone
             set undoreload=10000  " Maximum number lines to save for undo on a buffer reload
         endif
-        au BufWinLeave *  if ShouldSaveFile() | mkview | endif
-        au VimEnter * if ShouldSaveFile() | loadview | endif
 
-        function ShouldSaveFile()
-            if empty(expand('%'))
-                return 0
-            elseif &filetype == "gitcommit"
-                return 0
-            endif
-            return 1
-        endfunction
+        " au BufWinLeave *  if ShouldSaveFile() | mkview | endif
+        " au VimEnter * if ShouldSaveFile() | loadview | endif
+        " function ShouldSaveFile()
+        "     if empty(expand('%'))
+        "         return 0
+        "     elseif &filetype == "gitcommit"
+        "         return 0
+        "     endif
+        "     return 1
+        " endfunction
     " }
 " }
 
@@ -191,17 +191,17 @@
 autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 
 " Strip whitespace {
-    function! StripTrailingWhitespace()
-        " Preparation: save last search and cursor position.
-        let _s=@/
-        let l = line(".")
-        let c = col(".")
-        " Do the business
-        %s/\s\+$//e
-        " Clean up: restore previous search history and cursor position
-        let @/=_s
-        call cursor(l, c)
-    endfunction
+function! StripTrailingWhitespace()
+    " Preparation: save last search and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business
+    %s/\s\+$//e
+    " Clean up: restore previous search history and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
 " }
 
 " Cygwin Block Cursor {
@@ -229,6 +229,11 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
     " Plug 'edkolev/tmuxline.vim'
     Plug 'godlygeek/tabular'
     call plug#end()
+" }
+
+" restore_view {
+    set viewoptions=cursor,folds,slash,unix
+    let g:skipview_files = []
 " }
 
 " NERDCommenter {
