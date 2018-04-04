@@ -228,6 +228,9 @@ endfunction
     Plug 'mhinz/vim-signify'
     " Plug 'edkolev/tmuxline.vim'
     Plug 'godlygeek/tabular'
+    Plug 'https://github.com/vim-scripts/taglist.vim'
+    Plug 'https://github.com/vim-scripts/restore_view.vim.git'
+    Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     call plug#end()
 " }
 
@@ -269,6 +272,10 @@ endfunction
     highlight link FLAKE8_PyFlake     WarningMsg
 " }
 
+" NERDTree {
+    nnoremap <leader>nt :NERDTreeToggle<CR>
+" }
+
 " Zenburn {
     " colorscheme zenburn
 " }
@@ -284,6 +291,10 @@ endfunction
     let g:airline_powerline_fonts = 1
     let g:airline#extensions#whitespace#enabled = 1
     let g:airline_theme='molokai'
+" }
+
+" Taglist {
+    nnoremap <silent> <leader>tt :TlistToggle<CR>
 " }
 
 " Initialize directories {
