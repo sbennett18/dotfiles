@@ -23,7 +23,7 @@
     " if gitroot != ''
     "   let &tags = &tags . ',' . gitroot . '/.git/tags'
     " endif
-    set tags=./tags;
+    set tags=./tags,tags,$HOME/tags,/usr/include/tags;
 
     if has("autocmd")
         " Enable file type detection.
@@ -93,6 +93,9 @@
     " Any time <leader> appears in a keybinding it means use the key assigned
     " here (i.e. ,)
     let mapleader = ','
+
+    " Allow saving of files as sudo when I forgot to start vim using sudo
+    cnoremap w!! w !sudo tee > /dev/null %
 
     " Stupid shift fixes
     " nmap ; :
@@ -212,7 +215,7 @@ endfunction
 " }
 
 " plug.vim {
-    call plug#begin('~/.vim/plugged')
+    call plug#begin('$HOME/.vim/plugged')
 
     " Plug 'tpope/vim-sensible'
     Plug 'scrooloose/nerdcommenter'  " , { 'on': ['NERDComToggleComment', 'NERDComInvertComment'] }
@@ -303,8 +306,8 @@ endfunction
 " Initialize directories {
 function! InitializeDirectories()
     let parent = $HOME
-    let prefix = 'vim'
-    let common_dir = parent . '/.' . prefix . '/'
+    let prefix = '.vim'
+    let common_dir = parent . '/' . prefix . '/'
 
     let dir_list = {
             \ 'backup': 'backupdir',

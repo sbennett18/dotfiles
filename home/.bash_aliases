@@ -17,15 +17,13 @@
 #
 # Misc :)
 # alias less='less -r'                          # raw control characters
-# alias whence='type -a'                        # where, of a sort
-alias grep='grep --color'                     # show differences in colour
-alias egrep='egrep --color=auto'              # show differences in colour
+# alias whence='type -a'                        # where, of a sort alias grep='grep --color'                     # show differences in colour alias egrep='egrep --color=auto'              # show differences in colour
 alias fgrep='fgrep --color=auto'              # show differences in colour
 alias cgrep='grep --include=*.{c*,h*} -n'
 
 # Some shortcuts for different directory listings
 alias sl='ls'
-alias ls='ls -F --color=tty'                 # classify files in colour
+alias ls='ls -F --color=tty'                  # classify files in colour
 alias dir='ls --color=auto --format=vertical'
 alias vdir='ls --color=auto --format=long'
 alias l='ls -CF'                              #
@@ -39,4 +37,4 @@ alias vimrc="vim ${HOME}/.vimrc"
 
 alias svn-reset-hard='svn revert . -R && svn status | rm -rf $(awk -f <(echo "/^?/{print \$2}") <(svn status) ;)'
 
-alias ctagger='ctags --totals=yes -R -f tags .'
+alias ctagger='ctags --extra=+f --tag-relative=yes --totals=yes --recurse -f tags .'

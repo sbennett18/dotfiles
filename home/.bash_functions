@@ -1,4 +1,4 @@
-git()
+git ()
 {
     if [ x"$1" = xvdiff ] || [ x"$1" = xvdi ]; then
         shift
@@ -8,7 +8,7 @@ git()
     fi
 }
 
-svn()
+svn ()
 {
     if [ x"$1" = xvdiff ] || [ x"$1" = xvdi ]; then
         shift
@@ -18,7 +18,7 @@ svn()
     fi
 }
 
-auto-retry()
+auto-retry ()
 {
     false
     while [ $? -ne 0 ]; do
