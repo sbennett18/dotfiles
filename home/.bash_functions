@@ -12,7 +12,10 @@ svn ()
 {
     if [ x"$1" = xvdiff ] || [ x"$1" = xvdi ]; then
         shift
-        $(which svn) diff "$@" | vim -R -
+        $(which svn) diff -x -p "$@" | vim -R -
+    elif [ x"$1" = xdiff ] || [ x"$1" = xdi ]; then
+        shift
+        $(which svn) diff -x -p "$@"
     else
         $(which svn) "$@"
     fi
