@@ -339,4 +339,4 @@ endfunction
 call InitializeDirectories()
 " }
 
-" vim: sw=4 ts=4 sts=4 expandtab:
+" vim: set sw=4 ts=4 sts=4 expandtab:

@@ -32,55 +32,9 @@ helpless ()
     "$1" --help | less
 }
 
-corez ()
-{
-    local host="$1"; shift
-    local ssh_cmd="sshpass -p b10root ssh -o StrictHostKeyChecking=no root@${host}-corez -T"
-    local opts='display system.log shortlist'
-
-    if [ $# -eq 0 ]; then
-        sshpass -p b10root ssh -o StrictHostKeyChecking=no root@${host}-corez
-    elif [ $# -eq 1 ]; then
-        case "$1" in
-        'display')
-            echo 'cd /run/media/mmcblk0p2/cm_scripts && ./display.sh' | ${ssh_cmd}
-            ;;
-        'system.log')
-            echo 'tail -f /run/media/mmcblk0p3/logs/system.log' | ${ssh_cmd}
-            ;;
-        'shortlist')
-            echo "Available commands: ${opts}"
-            ;;
-        *)
-            echo "$@" | ${ssh_cmd}
-            ;;
-        esac
-    else
-        echo "$@" | ${ssh_cmd}
-    fi
-}
-# complete -F _known_hosts corez
-
-_corez ()
-{
-    local cur prev words cword
-    _init_completion -n : || return
-
-    _known_hosts_real -- "${cur}"
-    local cur prev opts hosts
-    COMPREPLY=()
-    cur="${COMP_WORDS[COMP_CWORD]}"
-    prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts=$(corez 'dummy' 'shortlist')
-    hosts=$(getent hosts | grep corez | tr -s '[:blank:]-' '\t' | cut -f 2 | sort | tr -s '[:space:]' ' ')
-
-    if [[ "${prev}" == "corez" ]]; then
-        COMPREPLY=( $(compgen -W "${hosts}" -- ${cur}) )
-    else
-        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-    fi
-}
-complete -F _corez corez
+if [ -f ~/systems/b10tac/corezrc ]; then
+    . ~/systems/b10tac/corezrc
+fi
 
 # Some example functions:
 #
