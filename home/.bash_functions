@@ -32,29 +32,9 @@ helpless ()
     "$1" --help | less
 }
 
-corez ()
-{
-    local host="$1"; shift
-    local ssh_cmd="sshpass -p b10root ssh -o StrictHostKeyChecking=no root@${host}-corez -T"
-
-    if [ $# -eq 0 ]; then
-        sshpass -p b10root ssh -o StrictHostKeyChecking=no root@${host}-corez
-    elif [ $# -eq 1 ]; then
-        case "$1" in
-        'display')
-            echo 'pushd /run/media/mmcblk0p2/cm_scripts; ./display.sh' | ${ssh_cmd}
-            ;;
-        'system.log')
-            echo 'tail -f /run/media/mmcblk0p3/logs/system.log' | ${ssh_cmd}
-            ;;
-        *)
-            echo "Unrecognized command '$1' not in [display, system]"
-            ;;
-        esac
-    else
-        echo "$@" | ${ssh_cmd}
-    fi
-}
+if [ -f ~/systems/b10tac/corezrc ]; then
+    . ~/systems/b10tac/corezrc
+fi
 
 # Some example functions:
 #

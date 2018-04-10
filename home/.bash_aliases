@@ -17,19 +17,21 @@
 #
 # Misc :)
 # alias less='less -r'                          # raw control characters
-# alias whence='type -a'                        # where, of a sort alias grep='grep --color'                     # show differences in colour alias egrep='egrep --color=auto'              # show differences in colour
-alias fgrep='fgrep --color=auto'              # show differences in colour
+alias whence='type -a'                        # where, of a sort
+alias grep='grep --color -n'                  # show differences in colour
+alias egrep='egrep --color=auto -n'           # show differences in colour
+alias fgrep='fgrep --color=auto -n'           # show differences in colour
 alias cgrep='grep --include=*.{c*,h*} -n'
 
 # Some shortcuts for different directory listings
 alias sl='ls'
 alias ls='ls -F --color=tty'                  # classify files in colour
-alias dir='ls --color=auto --format=vertical'
-alias vdir='ls --color=auto --format=long'
 alias l='ls -CF'                              #
 alias ll='ls -l'                              # long list
 alias la='ls -A'                              # all but . and ..
 alias lal='ls -Al'                            # long list, all but . and ..
+alias dir='ls --color=auto --format=vertical'
+alias vdir='ls --color=auto --format=long'
 
 alias h='history | less +G'
 
