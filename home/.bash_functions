@@ -1,3 +1,5 @@
+# .bash_functions
+
 git ()
 {
     if [ x"$1" = xvdiff ] || [ x"$1" = xvdi ]; then
@@ -21,7 +23,7 @@ svn ()
     fi
 }
 
-auto-retry ()
+autoretry ()
 {
     false
     while [ $? -ne 0 ]; do
@@ -35,7 +37,7 @@ helpless ()
     "$1" --help | less
 }
 
-if [ -f ~/systems/b10tac/corezrc ]; then
+if [ -r ~/systems/b10tac/corezrc ]; then
     . ~/systems/b10tac/corezrc
 fi
 

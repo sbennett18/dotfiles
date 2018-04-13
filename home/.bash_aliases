@@ -18,7 +18,7 @@
 # Misc :)
 # alias less='less -r'                          # raw control characters
 alias whence='type -a'                        # where, of a sort
-alias grep='grep --color -n'                  # show differences in colour
+alias grep='grep --color'                     # show differences in colour
 alias egrep='egrep --color=auto -n'           # show differences in colour
 alias fgrep='fgrep --color=auto -n'           # show differences in colour
 alias cgrep='grep --include=*.{c*,h*} -n'
@@ -38,5 +38,6 @@ alias h='history | less +G'
 alias vimrc="vim ${HOME}/.vimrc"
 
 alias svn-reset-hard='svn revert . -R && svn status | rm -rf $(awk -f <(echo "/^?/{print \$2}") <(svn status) ;)'
+alias svn-remove-untracked='\rm -i $( \svn status | \grep ^? | \awk "{ print \$2 }" )'
 
 alias ctagger='ctags --extra=+f --tag-relative=yes --totals=yes --recurse -f tags .'

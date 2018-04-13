@@ -1,7 +1,7 @@
 # .bashrc
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
+if [ -r /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
@@ -84,15 +84,15 @@ export LESS=' -i -r '
 # Aliases
 #
 # Some people use a different file for aliases
-if [ -f "${HOME}/.bash_aliases" ]; then
-    . "${HOME}/.bash_aliases"
+if [ -r ~/.bash_aliases ]; then
+    . ~/.bash_aliases
 fi
 
 # Functions
 #
 # Some people use a different file for functions
-if [ -f "${HOME}/.bash_functions" ]; then
-    . "${HOME}/.bash_functions"
+if [ -r ~/.bash_functions ]; then
+    . ~/.bash_functions
 fi
 
 alias sl='ls'
