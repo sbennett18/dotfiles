@@ -188,6 +188,8 @@
         return toggle_file
     endfunction
     nnoremap <C-k><C-o> :vsp<CR>:tag <C-R>=ToggleHeaderCodeFile()<CR><CR>
+
+    vmap <Leader>b :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 " }
 
 " Always switch to the current file directory
@@ -231,7 +233,7 @@ endfunction
     Plug 'mhinz/vim-signify'
     " Plug 'edkolev/tmuxline.vim'
     Plug 'godlygeek/tabular'
-    Plug 'https://github.com/vim-scripts/taglist.vim'
+    Plug 'majutsushi/tagbar'
     Plug 'https://github.com/vim-scripts/restore_view.vim.git'
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
     call plug#end()
@@ -300,7 +302,7 @@ endfunction
 " }
 
 " Taglist {
-    nnoremap <silent> <leader>tt :TlistToggle<CR>
+    nnoremap <silent> <leader>tt :TagbarToggle<CR>
 " }
 
 " Initialize directories {
