@@ -37,10 +37,6 @@ helpless ()
     "$1" --help | less
 }
 
-if [ -r ~/systems/b10tac/corezrc ]; then
-    . ~/systems/b10tac/corezrc
-fi
-
 # Some example functions:
 #
 # a) function settitle
