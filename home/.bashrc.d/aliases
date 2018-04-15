@@ -35,9 +35,26 @@ alias vdir='ls --color=auto --format=long'
 
 alias h='history | less +G'
 
+alias vi='vim'
 alias vimrc="vim ${HOME}/.vimrc"
 
 alias svn-reset-hard='svn revert . -R && svn status | rm -rf $(awk -f <(echo "/^?/{print \$2}") <(svn status) ;)'
 alias svn-remove-untracked='\rm -i $( \svn status | \grep ^? | \awk "{ print \$2 }" )'
 
 alias ctagger='ctags --extra=+f --tag-relative=yes --totals=yes --recurse -f tags .'
+
+alias systemctl='sudo systemctl'
+alias pacman='sudo pacman'
+alias pacrepo='sudo reflector -l 20 -f 10 --save /etc/pacman.d/mirrorlist'
+alias journalctl='sudo journalctl'
+alias pacu='sudo pacman -Syu --noconfirm'
+alias auru='yaourt -Syua --noconfirm'
+alias se='ls /usr/bin | grep'
+
+export QT_STYLE_OVERRIDE=gtk
+export QT_SELECT=qt5
+
+if [[ $LANG = '' ]]; then
+    export LANG=en_US.UTF-8
+fi
+
