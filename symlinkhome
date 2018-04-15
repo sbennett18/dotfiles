@@ -4,8 +4,20 @@ if [ $# -ne 0 ]; then
     exit 1;
 fi
 
+LN_CMD='ln -siv'
 LN_HOME_DIR="$( dirname $( readlink -f "${0}" ) )/home"
 
-for file in $( find "${LN_HOME_DIR}" -maxdepth 1 -mindepth 1 ); do
-    ln -s -i -t "${HOME}" "${file}"
+echo "1 :: FILES"
+for file in $( find "${LN_HOME_DIR}" -maxdepth 1 -mindepth 1 -type f ); do
+    ${LN_CMD} -t "${HOME}/tmp" "${file}"
+done
+
+echo
+for dir in $( find "${LN_HOME_DIR}" -maxdepth 1 -mindepth 1 -type d ); do
+    subdir="${HOME}/tmp/$( basename "${dir}" )"
+    echo "2 :: DIRECTORIES :: ‘${subdir}’"
+    mkdir "${subdir}"
+    for file in $( find "${dir}" -maxdepth 1 -mindepth 1 -type f ); do
+        ${LN_CMD} -t "${subdir}" "${file}"
+    done
 done
