@@ -29,7 +29,7 @@ __PROMPT_BG=${COLORS['Bright-Black']}
         fi
     done
     __PROMPT_BG="${t}"
-    printf "\033[${t}m"
+    printf "\[\033[${t}m\]"
 }
 
 ++ ()
@@ -44,12 +44,12 @@ __PROMPT_BG=${COLORS['Bright-Black']}
             continue
         fi
     done
-    printf "\033[${t}m"
+    printf "\[\033[${t}m\]"
 }
 
 -- ()
 {
-    printf "\033[m\\e[${__PROMPT_BG}m"
+    printf "\[\033[m\\e[${__PROMPT_BG}m\]"
 }
 
 prompt_command ()

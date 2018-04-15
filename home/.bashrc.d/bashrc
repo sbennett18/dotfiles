@@ -50,9 +50,37 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+declare -A COLORS=(
+            ['bold']=1        ['light']=2          ['blink']=5          ['invert']=7
+           ['black']=30         ['red']=31         ['green']=32         ['yellow']=33         ['blue']=34         ['purple']=35         ['cyan']=36         ['white']=37
+           ['Black']=40         ['Red']=41         ['Green']=42         ['Yellow']=43         ['Blue']=44         ['Purple']=45         ['Cyan']=46         ['White']=47
+    ['bright-black']=90  ['bright-red']=91  ['bright-green']=92  ['bright-yellow']=93  ['bright-blue']=94  ['bright-purple']=95  ['bright-cyan']=96  ['bright-white']=97
+    ['Bright-Black']=100 ['Bright-Red']=101 ['Bright-Green']=102 ['Bright-Yellow']=103 ['Bright-Blue']=104 ['Bright-Purple']=105 ['Bright-Cyan']=106 ['Bright-White']=107
+)
+
+# Non-printing sequences should be enclosed in \[ and \]
+# https://www.gnu.org/software/bash/manual/bashref.html#Controlling-the-Prompt
++ ()
+{
+    t=''
+    for arg in $@; do
+        if [ ${COLORS[${arg}]+isset} ]; then
+            t="${t};${COLORS[${arg}]}"
+        else
+            echo "Bad color: ${arg}"
+            continue
+        fi
+    done
+    printf "\[\033[${t}m\]"
+}
+
 if [ "$color_prompt" = yes ]; then
-    PS1='\[\e[0;32m\][\u@\h]\[\e[0;34m\]\W\[\e[0;33m\]$(__git_ps1 " (%s)")\[\e[0;34m\]\$\[\e[0;0m\] \[\e]2;\h: \w\a\]'
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWUPSTREAM="auto"
+    GIT_PS1_SHOWCOLORHINTS=1
+    PROMPT_COMMAND="__git_ps1 '$(+ green)[\\u@\\h] $(+ blue)\\W$(+)' '$(+ blue)\$$(+) '"
+    # PS1='\[\e[0;32m\][\u@\h]\[\e[0;34m\]\W\[\e[0;33m\]$(__git_ps1 " (%s)")\[\e[0;34m\]\$\[\e[0;0m\] \[\e]2;\h: \w\a\]'
+    # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
