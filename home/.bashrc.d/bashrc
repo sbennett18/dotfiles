@@ -50,6 +50,8 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# function join_by { local IFS="$1"; shift; echo "$*"; }
+
 declare -A COLORS=(
             ['bold']=1        ['light']=2          ['blink']=5          ['invert']=7
            ['black']=30         ['red']=31         ['green']=32         ['yellow']=33         ['blue']=34         ['purple']=35         ['cyan']=36         ['white']=37
@@ -62,16 +64,20 @@ declare -A COLORS=(
 # https://www.gnu.org/software/bash/manual/bashref.html#Controlling-the-Prompt
 + ()
 {
-    t=''
-    for arg in $@; do
-        if [ ${COLORS[${arg}]+isset} ]; then
-            t="${t};${COLORS[${arg}]}"
-        else
-            echo "Bad color: ${arg}"
-            continue
-        fi
-    done
-    printf "\[\033[${t}m\]"
+    local cv
+    if [ $# -eq 0 ]; then
+        cv='0;0'
+    else
+        for arg in $@; do
+            if [ ${COLORS[${arg}]+isset} ]; then
+                cv+=";${COLORS[${arg}]}"
+            else
+                echo "Bad color: ${arg}"
+                continue
+            fi
+        done
+    fi
+    printf "\[\033[${cv}m\]"
 }
 
 __prompt_ret_cmd ()
@@ -122,7 +128,7 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
 alias sl='ls'
@@ -140,18 +146,6 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-
-#if [ $(uname -s) == "Linux" ]; then
-#    # Command completion stuff
-#    #  completes hostnames for ssh
-#    if [ -r $HOME/.ssh/known_hosts ]; then
-#        complete -W "$(awk '{ h=split($1,ha,",") } { print ha[1] }' $HOME/.ssh/known_hosts | tr '\n' ' ')" ssh
-#    fi
-#
-#    if [ -r $HOME/.autofill_hosts ]; then
-#        complete -W "$(cat $HOME/.autofill_hosts)" ssh
-#    fi
-#fi
 
 # colored man pages :)
 export LESS_TERMCAP_mb=$'\E[01;31m'
