@@ -23,7 +23,7 @@
     " if gitroot != ''
     "   let &tags = &tags . ',' . gitroot . '/.git/tags'
     " endif
-    set tags=./tags,tags,$HOME/tags,/usr/include/tags;
+    set tags=./tags;
 
     if has("autocmd")
         " Enable file type detection.
@@ -189,7 +189,8 @@
     endfunction
     nnoremap <C-k><C-o> :vsp<CR>:tag <C-R>=ToggleHeaderCodeFile()<CR><CR>
 
-    vmap <Leader>b :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+    " vmap <Leader>b :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
+    map <leader>b :VCBlame<CR>
 " }
 
 " Always switch to the current file directory
@@ -236,6 +237,7 @@ endfunction
     Plug 'majutsushi/tagbar'
     Plug 'https://github.com/vim-scripts/restore_view.vim.git'
     Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+    Plug 'juneedahamed/vc.vim'
     call plug#end()
 " }
 
