@@ -3,8 +3,8 @@
     set cc=120            " Place vertical bar at 80 characters
     set nowrap            " Don't wrap long lines
     set autoindent        " Indent at the same level of the previous line
-    set shiftwidth=4      " Use indents of two spaces
-    set tabstop=4         " An indentation every two columns
+    set shiftwidth=4      " Use indents of four spaces
+    set tabstop=4         " An indentation every four columns
     set softtabstop=4     " Let backspace delete indent
     set backspace=2
     set expandtab         " Tabs are spaces, not tabs

@@ -79,7 +79,7 @@ __prompt_ret_cmd ()
     RET=$?
     ERRMSG=""
     if [ ${RET} -ne 0 ]; then
-        ERRMSG="$(+ red)${RET}\$$(+)";
+        ERRMSG="$(+ red) ${RET}\$$(+)";
     else
         ERRMSG="\$"
     fi
