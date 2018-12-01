@@ -4,9 +4,9 @@ git ()
 {
     if [ x"$1" = xvdiff ] || [ x"$1" = xvdi ]; then
         shift
-        $(which git) --no-pager diff "$@" | vim -R -
+        "$(which git)" --no-pager diff "$@" | vim -R -
     else
-        $(which git) "$@"
+        "$(which git)" "$@"
     fi
 }
 
@@ -14,12 +14,12 @@ svn ()
 {
     if [ x"$1" = xvdiff ] || [ x"$1" = xvdi ]; then
         shift
-        $(which svn) diff -x -p "$@" | vim -R -
+        "$(which svn)" diff -x -p "$@" | vim -R -
     elif [ x"$1" = xdiff ] || [ x"$1" = xdi ]; then
         shift
-        $(which svn) diff -x -p "$@"
+        "$(which svn)" diff -x -p "$@"
     else
-        $(which svn) "$@"
+        "$(which svn)" "$@"
     fi
 }
 
