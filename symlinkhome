@@ -2,6 +2,11 @@
 
 SCRIPT_DIR=$(dirname $(readlink -f "$0"))
 
-for file in $(find "$SCRIPT_DIR/home" -maxdepth 1 -mindepth 1); do
-  ln -s -i "$file" "$HOME/$(basename $file)"
+for target in $(find "${SCRIPT_DIR}/home" -maxdepth 1 -mindepth 1); do
+    link_name="${HOME}/$(basename "${target}")"
+    if [ "$(readlink -f "${link_name}")" != "${target}" ]; then
+        ln -s -i "${target}" "${link_name}"
+    else
+        echo "'${link_name}' is already setup"
+    fi
 done

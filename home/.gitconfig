@@ -1,3 +1,7 @@
+[user]
+	name = Stephen Bennett
+	email = bennett18@gmail.com
+
 [color]
 	ui = auto
 
@@ -6,10 +10,6 @@
 	local = green
 	remote = red
 	plain = cyan
-
-[user]
-	name = Stephen Bennett
-	email = bennett18@gmail.com
 
 [merge]
 	conflictstyle = diff3
