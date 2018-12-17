@@ -1,3 +1,5 @@
+set packpath+=~/.vim/pack/
+
 " Formatting {
     " set cc=80,120         " Place vertical bar at 80 characters
     set cc=120            " Place vertical bar at 80 characters
@@ -300,7 +302,8 @@ endfunction
     let g:airline#extensions#tabline#enabled = 1
     let g:airline_powerline_fonts = 1
     let g:airline#extensions#whitespace#enabled = 1
-    let g:airline_theme='molokai'
+    " let g:airline_theme='molokai'
+    let g:airline_theme='cool'
 " }
 
 " Taglist {

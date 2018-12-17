@@ -5,11 +5,9 @@ case $- in
 esac
 
 if [ -d ~/.bashrc.d ]; then
-    for i in ~/.bashrc.d/*; do
-        if [ -r $i ]; then
-            . $i
-        fi
+    for f in ~/.bashrc.d/*; do
+        [ -r "${f}" ] && . "${f}"
     done
-    unset i
+    unset f
 fi
 

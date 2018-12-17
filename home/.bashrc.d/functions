@@ -2,40 +2,81 @@
 
 git ()
 {
-    if [ x"$1" = xvdiff ] || [ x"$1" = xvdi ]; then
-        shift
-        "$(which git)" --no-pager diff "$@" | vim -R -
-    else
-        "$(which git)" "$@"
-    fi
+    local -r GIT="$( which git )"
+    case "${1}" in
+        vdiff|vdi)
+            shift
+            "${GIT}" --no-pager diff "$@" | vim -R -
+            ;;
+        *)
+            "${GIT}" "$@"
+            ;;
+    esac
 }
+
 
 svn ()
 {
-    if [ x"$1" = xvdiff ] || [ x"$1" = xvdi ]; then
-        shift
-        "$(which svn)" diff -x -p "$@" | vim -R -
-    elif [ x"$1" = xdiff ] || [ x"$1" = xdi ]; then
-        shift
-        "$(which svn)" diff -x -p "$@"
-    else
-        "$(which svn)" "$@"
-    fi
+    local -r SVN="$( which svn )"
+    case "${1}" in
+        diffstat|dis)
+            shift
+            "${SVN}" diff "$@" | diffstat -cC
+            ;;
+        diff|di)
+            shift
+            "${SVN}" diff -x -p "$@"
+            ;;
+        incoming|inc)
+            shift
+            local -r OLD=$( [ $# -eq 0 ] && echo "." || echo "$1" )
+            readarray -t < <( svn info "${OLD}" )
+            local -r URL="${MAPFILE[2]#URL: }"
+            local -r REPO_ROOT="${MAPFILE[3]#Repository Root: }"
+            svn diff --old "${OLD}" --new "^${URL#$REPO_ROOT}"
+            ;;
+        outgoing|out)
+            shift
+            local -r NEW=$( [ $# -eq 0 ] && echo "." || echo "$1" )
+            readarray -t < <( svn info "${NEW}" )
+            local -r URL="${MAPFILE[2]#URL: }"
+            local -r REPO_ROOT="${MAPFILE[3]#Repository Root: }"
+            svn diff --new "${NEW}" --old "^${URL#$REPO_ROOT}"
+            ;;
+        vdiff|vdi)
+            shift
+            svn diff "$@" | vim -R -
+            ;;
+        vincoming|vinc)
+            shift
+            svn incoming "$@" | vim -R -
+            ;;
+        voutgoing|vout)
+            shift
+            svn outgoing "$@" | vim -R -
+            ;;
+        *)
+            "${SVN}" "$@"
+            ;;
+    esac
 }
+
 
 autoretry ()
 {
     false
     while [ $? -ne 0 ]; do
         echo "Attempting ($(date))..."
-        "$@" || (sleep 3; false)
+        "$@" || ( sleep 3; false )
     done
 }
+
 
 helpless ()
 {
     "$1" --help | less
 }
+
 
 # Some example functions:
 #

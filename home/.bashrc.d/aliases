@@ -14,7 +14,11 @@
 # Default to human readable figures
 # alias df='df -h'
 # alias du='du -h'
-#
+
+alias su='su --login'
+
+alias cdp='cd $(pwd -P)'
+
 # Misc :)
 # alias less='less -r'                          # raw control characters
 alias whence='type -a'                        # where, of a sort
@@ -36,7 +40,9 @@ alias vdir='ls --color=auto --format=long'
 alias h='history | less +G'
 
 alias vi='vim'
-alias vimrc="vim ${HOME}/.vimrc"
+alias vimrc='vim ~/.vimrc'
+
+alias vimbashrc='vim ~/.bashrc'
 
 alias svn-reset-hard='svn revert . -R && svn status | rm -rf $(awk -f <(echo "/^?/{print \$2}") <(svn status) ;)'
 alias svn-remove-untracked='\rm -i $( \svn status | \grep ^? | \awk "{ print \$2 }" )'
