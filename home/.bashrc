@@ -4,9 +4,11 @@ case $- in
       *) return;;
 esac
 
+[ -f /etc/bashrc ] && . /etc/bashrc
+
 if [ -d ~/.bashrc.d ]; then
     for f in ~/.bashrc.d/*; do
-        [ -r "${f}" ] && . "${f}"
+        [ -f "${f}" ] && . "${f}"
     done
     unset f
 fi

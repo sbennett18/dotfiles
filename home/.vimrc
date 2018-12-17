@@ -1,4 +1,4 @@
-set packpath+=~/.vim/pack/
+" set packpath+=~/.vim/pack/
 
 " Formatting {
     " set cc=80,120         " Place vertical bar at 80 characters
