@@ -17,7 +17,8 @@
 
 alias su='su --login'
 
-alias cdp='cd $(pwd -P)'
+alias cdp='command cd -P'
+# alias cdp='cd $(pwd -P)'
 
 # Misc :)
 # alias less='less -r'                          # raw control characters
@@ -34,6 +35,8 @@ alias l='ls -CF'                              #
 alias ll='ls -l'                              # long list
 alias la='ls -A'                              # all but . and ..
 alias lal='ls -Al'                            # long list, all but . and ..
+alias lh='ls -d .??*'                         # list hidden
+alias lhl='ls -ld .??*'                       # long list hidden
 alias dir='ls --color=auto --format=vertical'
 alias vdir='ls --color=auto --format=long'
 

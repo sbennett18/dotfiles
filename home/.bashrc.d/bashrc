@@ -82,15 +82,19 @@ declare -A COLORS=(
 
 __prompt_ret_cmd ()
 {
-    RET=$?
-    ERRMSG=""
+    local -ri RET=$?
     if [ ${RET} -ne 0 ]; then
-        ERRMSG="$(+ red) ${RET}\$$(+)";
+        local -r ERRMSG="$(+ red) ${RET}\$$(+)";
     else
-        ERRMSG="\$"
+        local -r ERRMSG="\$"
+    fi
+    if [ -n "${VIRTUAL_ENV}" ]; then
+        local -r VENV="($( basename "${VIRTUAL_ENV}" )) "
+    else
+        local -r VENV=""
     fi
 
-    __git_ps1 "[\\u@\\h] $(+ bold yellow)\\W$(+)" "$(+)${ERRMSG} "
+    __git_ps1 "[\\u@\\h] ${VENV}$(+ bold yellow)\\W$(+)" "$(+)${ERRMSG} "
 
     # Pass the read $? along so it can be read on the command line
     return ${RET}

@@ -1,5 +1,11 @@
 # .bash_functions
 
+whichfunc ()
+(
+    shopt -s extdebug
+    declare -F "$1"
+)
+
 git ()
 {
     local -r GIT="$( which git )"

@@ -28,8 +28,8 @@
     set tags=./tags;
 
     if has("autocmd")
-        " Enable file type detection.
-        " Also load indent files, to automatically do language-dependent indenting.
+        " Enable file type detection
+        " Also load indent files, to automatically do language-dependent indenting
         filetype plugin indent on
     endif
 
@@ -102,7 +102,7 @@
     " Stupid shift fixes
     " nmap ; :
 
-    " Wrapped lines goes down/up to next row, rather than next line in file.
+    " Wrapped lines goes down/up to next row, rather than next line in file
     noremap j gj
     noremap k gk
 
@@ -118,7 +118,7 @@
     " http://stackoverflow.com/a/8064607/127816
     vnoremap . :normal .<cr>
 
-    " Yank from the cursor to the end of the line, to be consistent with C and D.
+    " Yank from the cursor to the end of the line, to be consistent with C and D
     nnoremap Y y$
 
     " Move lines up or down
@@ -167,6 +167,7 @@
     nmap <leader>f7 :set foldlevel=7<CR>
     nmap <leader>f8 :set foldlevel=8<CR>
     nmap <leader>f9 :set foldlevel=9<CR>
+    nnoremap <space> za
     nnoremap za zA
     nnoremap zA za
     nnoremap zc zC
@@ -200,7 +201,7 @@ autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
 
 " Strip whitespace {
 function! StripTrailingWhitespace()
-    " Preparation: save last search and cursor position.
+    " Preparation: save last search and cursor position
     let _s=@/
     let l = line(".")
     let c = col(".")
