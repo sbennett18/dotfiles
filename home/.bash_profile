@@ -6,7 +6,7 @@ if [ -f ~/.bashrc ]; then
 fi
 
 # User specific environment and startup programs
-
-PATH=$PATH:$HOME/.local/bin:$HOME/bin
-
-export PATH
+export PATH=${PATH}:${HOME}/.local/bin:${HOME}/bin
+#export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
+#export PYTHONPATH="/usr/local/lib/python2.6/site-packages:${PYTHONPATH}"
+export PYTHONPATH=${PYTHONPATH}:${HOME}/python

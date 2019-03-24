@@ -4,7 +4,7 @@ if [ $# -ne 0 ]; then
     exit 1;
 fi
 
-LN_CMD='ln -siv'
+LN_CMD="$( which ln ) -siv"
 LN_HOME_DIR="$( dirname $( readlink -f "${0}" ) )/home"
 
 echo "1 :: FILES"
