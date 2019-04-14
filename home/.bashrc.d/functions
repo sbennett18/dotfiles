@@ -68,6 +68,14 @@ svn ()
 }
 
 
+cleanvimdir ()
+{
+    pushd ~/.vim > /dev/null
+    rm -rIv undo/ view/ backup/
+    popd > /dev/null
+}
+
+
 autoretry ()
 {
     false

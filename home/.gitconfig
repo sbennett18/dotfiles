@@ -1,3 +1,5 @@
+; vim: set sw=4 ts=4 sts=0 noexpandtab smarttab:
+
 [user]
 	name = Stephen Bennett
 	email = bennett18@gmail.com
@@ -15,6 +17,9 @@
 [merge]
 	conflictstyle = diff3
 	; defaultToUpstream = true
+
+[diff]
+	colorMoved = default
 
 [push]
 	default = simple
@@ -35,9 +40,9 @@
 	lo = log --decorate --oneline
 	; lo = !git --no-pager log --oneline --decorate=short
 	lc = log ORIG_HEAD.. --stat --no-merges
-	incoming = log ..@{upstream}
+	incoming = log --decorate --oneline ..@{upstream}
 	; incoming = !git update && git log ..@{upstream}
-	outgoing = log @{upstream}..
+	outgoing = log --decorate --oneline @{upstream}..
 	graph = log --graph --pretty=oneline --abbrev-commit --decorate
 	;compare = show-branch --more=999 --current
 	ccompare = show-branch --current --topo-order
@@ -51,5 +56,3 @@
 
 ; The following command removes all references of <filename> from the repository
 ; git filter-branch --index-filter 'git rm --cached --ignore-unmatch <filename>' --prune-empty HEAD
-
-; vim: set sw=4 ts=4 sts=0 noexpandtab smarttab:

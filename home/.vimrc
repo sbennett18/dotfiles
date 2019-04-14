@@ -24,7 +24,7 @@ endif
     set encoding=utf-8
     syntax on
     set modeline           " Enable per-file modeline configurations
-    " colorscheme default    " https://github.com/nathanaelkane/vim-indent-guides/issues/31#issuecomment-4583981
+    colorscheme default    " https://github.com/nathanaelkane/vim-indent-guides/issues/31#issuecomment-4583981
 
     " Make tags placed in .git/tags file available in all levels of a repsitory
     " let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
@@ -300,9 +300,9 @@ endfunction
 " }
 
 " Solarized {
-    let g:solarized_termcolors=256
-    set background=dark
-    colorscheme solarized
+    " let g:solarized_termcolors=256
+    " set background=dark
+    " colorscheme solarized
 " }
 
 " Airline {
