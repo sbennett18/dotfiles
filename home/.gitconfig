@@ -29,6 +29,17 @@
 [push]
 	default = simple
 
+[color "status"]
+	added = green
+	changed = yellow
+	untracked = cyan
+
+[color "diff"]
+	meta = cyan
+	frag = magenta
+	old = red
+	new = green
+
 [alias]
 	st = status
 	co = checkout
