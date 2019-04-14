@@ -7,6 +7,11 @@
 [core]
 	editor = vim
 	pager = less -F -X -S
+	whitespace = trailing-space,space-before-tab
+
+; Used when applying a patch
+[apply]
+	whitespace = fix
 
 [init]
 	templatedir = ~/.git_template
