@@ -1,58 +1,74 @@
+; vim: set sw=4 ts=4 sts=0 noexpandtab smarttab:
+
 [user]
 	name = Stephen Bennett
 	email = bennett18@gmail.com
 
-[color]
-	ui = auto
-
-[color.branch]
-	current = yellow
-	local = green
-	remote = red
-	plain = cyan
-
-[merge]
-	conflictstyle = diff3
-	;defaultToUpstream = true
-
-[alias]
-	unstage = reset HEAD --
-	last = log -1
-	s = status
-	co = checkout
-	t = tag -n
-	d = diff
-	dc = diff --cached
-	br = branch -vv
-	k = !gitk
-	l = log --decorate
-	lo = log --decorate --oneline
-	lc = log ORIG_HEAD.. --stat --no-merges
-	ls = ls-files
-	ca = commit --amend
-	;compare = show-branch --more=999 --current
-	ccompare = show-branch --current --topo-order
-	;compare = show-branch --topo-order
-	update = remote --verbose update --prune
-	incoming = !git update; git log ..@{upstream}
-	outgoing = log @{upstream}..
-	ctags = !.git/hooks/ctags
-	sb = show-branch --topo-order --more=9999
-	ri = rebase -i --autosquash
-	root = rev-parse --show-toplevel
-
-; The following command removes all references of <filename> from the repository
-;git filter-branch --index-filter 'git rm --cached --ignore-unmatch <filename>' --prune-empty HEAD
-
-[show-branch]
-	default = --topo-order
-
 [core]
 	editor = vim
 	pager = less -F -X -S
+	whitespace = trailing-space,space-before-tab
+
+; Used when applying a patch
+[apply]
+	whitespace = fix
 
 [init]
 	templatedir = ~/.git_template
 
+[color]
+	ui = auto
+
+[merge]
+	conflictstyle = diff3
+	; defaultToUpstream = true
+
+[diff]
+	colorMoved = default
+
 [push]
 	default = simple
+
+[color "status"]
+	added = green
+	changed = yellow
+	untracked = cyan
+
+[color "diff"]
+	meta = cyan
+	frag = magenta
+	old = red
+	new = green
+
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	ca = commit --amend
+	ri = rebase -i --autosquash
+	unstage = reset HEAD --
+	last = log -1 HEAD --stat
+	di = diff
+	dc = diff --cached
+	t = tag -n
+	br = branch -vv
+	l = log --decorate
+	lo = log --decorate --oneline
+	; lo = !git --no-pager log --oneline --decorate=short
+	lc = log ORIG_HEAD.. --stat --no-merges
+	incoming = log --decorate --oneline ..@{upstream}
+	; incoming = !git update && git log ..@{upstream}
+	outgoing = log --decorate --oneline @{upstream}..
+	graph = log --graph --pretty=oneline --abbrev-commit --decorate
+	;compare = show-branch --more=999 --current
+	ccompare = show-branch --current --topo-order
+	;compare = show-branch --topo-order
+	update = fetch --verbose --all --prune
+	ls = ls-files
+	sb = show-branch --topo-order --more=9999
+	root = rev-parse --show-toplevel
+	k = !gitk
+	ctags = !.git/hooks/ctags
+
+; The following command removes all references of <filename> from the repository
+; git filter-branch --index-filter 'git rm --cached --ignore-unmatch <filename>' --prune-empty HEAD
