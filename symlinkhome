@@ -14,7 +14,7 @@ lnif ()
     local -r link_name="${target}/$( basename "${file}" )"
 
     if [ "$( readlink -f "${link_name}" )" != "${file}" ]; then
-        "${LN_CMD}" -t "${target}" "${file}"
+        ${LN_CMD} -t "${target}" "${file}"
     else
         echo "'${link_name}' is already setup"
     fi
