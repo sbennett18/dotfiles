@@ -1,8 +1,8 @@
 ; vim: set sw=4 ts=4 sts=0 noexpandtab smarttab:
 
-[user]
-	name = Stephen Bennett
-	email = bennett18@gmail.com
+[include]
+	; Place [user] section and any other personal config here
+	path = ~/.gitconfig.local
 
 [core]
 	editor = vim
