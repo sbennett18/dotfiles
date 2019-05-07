@@ -94,7 +94,7 @@ __prompt_ret_cmd ()
         local -r VENV=""
     fi
 
-    __git_ps1 "[\\u@\\h] ${VENV}$(+ bold yellow)\\W$(+)" "$(+)${ERRMSG} "
+    __git_ps1 "[$(+ bold green)\\u@\\h$(+)] ${VENV}$(+ bold blue)\\w$(+)" "$(+)${ERRMSG} "
 
     # Pass the read $? along so it can be read on the command line
     return ${RET}
